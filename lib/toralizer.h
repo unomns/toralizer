@@ -16,8 +16,30 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 
+/*
+ socks4 RFC (see https://www.openssh.com/txt/socks4.protocol)
+ 
+ Request
+             +----+----+----+----+----+----+----+----+----+----+....+----+
+             | VN | CD | DSTPORT |      DSTIP        | USERID       |NULL|
+             +----+----+----+----+----+----+----+----+----+----+....+----+
+# of bytes:     1    1      2              4           variable       1
+ 
+ Response
+            +----+----+----+----+----+----+----+----+
+            | VN | CD | DSTPORT |      DSTIP        |
+            +----+----+----+----+----+----+----+----+
+# of bytes:    1    1      2              4
+
+ 
+ 
+ */
+
 #define PROXY       "127.0.0.1"
 #define PROXYPORT   9050
+#define USERNAME    "toraliz"
+#define REQSIZE     sizeof(struct proxy_request)
+#define RESSIZE     sizeof(struct proxy_response)
 
 typedef unsigned char int8;
 typedef unsigned short int int16;
@@ -40,6 +62,8 @@ struct proxy_response {
 };
 typedef struct proxy_response Res;
 
-int toralize(int argc, char *argv[]);
+Req *request(const char*, const int);
+
+int toralize(int, char**);
 
 #endif /* toralize_h */

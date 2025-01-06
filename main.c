@@ -2,13 +2,12 @@
 //  main.c
 //  toralizer
 //
-//  Created by Murad Nurmukhamedov on 1/6/25.
-//
+//  Created by Murad Nurmukhamedov on 1/6/
 
-#include <stdio.h>
+#include "lib/toralizer.h"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
+int main(int argc, char * argv[]) {
+    toralize(argc, argv);
+    
     return 0;
 }
